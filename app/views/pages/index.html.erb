@@ -1,0 +1,57 @@
+<div class="ui info message" data-turbolinks-permanent>
+  <i class="close icon"></i>
+  <div class="header">
+  </div>
+  <script type="text/javascript" src="https://www.brainyquote.com/link/quotebr.js"></script>
+  <small><i><a href="https://www.brainyquote.com/quotes_of_the_day.html" target="_blank" rel="nofollow">more Quotes</a></i></small>
+</div>
+    <h1 class="ui header">Swiftly</h1><small><p style="text-align: center;">A Swift Labs application in development</p></small><br>
+    <p>This application is currently in beta testing. It is being developed for production. If you are testing this application please submit any bugs/errors that you find, along with suggestions for improvement, to <a href="mailto:swiftlabs.space">Swiftlabs Dev Team</a>. Thank you for helping us design better products!</p>
+    <p>Don't forget to review this application at <a href="https://frederick16.typeform.com/to/eWgfXD"><strong>Typeform</strong></a></p>
+
+<br>
+<div class="ui grid">
+ <div class="four wide column"></div>
+  <div class="four wide column">
+  <div class="ui segments">
+  <div class="ui segment">
+    <p><em>Coming Soon..</em></p>
+  </div>
+  <div class="ui secondary segment">
+    <p>Live User Chat</p>
+    <%= image_tag("chatting.png", size: "64x64", alt: "users chatting") %>
+  </div>
+</div>
+
+  </div>
+
+  <div class="four wide column">
+       <div class="ui segments">
+  <div class="ui segment">
+    <p><strong>Active Feature</strong></p>
+  </div>
+  <div class="ui secondary segment">
+    <p><%=link_to 'Task Management', tasks_path %></p>
+    <%= image_tag("list.png", size: "64x64", alt: "making a list") %>
+  </div>
+</div>
+
+
+
+
+  </div>
+  <div class="four wide column">
+
+  </div>
+  </div>
+
+<script>
+    $('.message .close')
+        .on('click', function() {
+            $(this)
+                .closest('.message')
+                .transition('fade')
+            ;
+        })
+    ;
+</script>

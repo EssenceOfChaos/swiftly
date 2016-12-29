@@ -1,0 +1,46 @@
+<%= render 'shared/submenu' %>
+
+
+<h1>Users</h1>
+
+<table class="ui sortable celled table">
+  <thead align='center'>
+    <tr>
+      <th>Avatar</th>
+      <th class="sorted descending">Display name</th>
+      <th class="">Email</th>
+      <th colspan="3">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+
+      <tr>
+       <td><%= image_tag user.avatar.url(:thumb) %></td>
+        <td><%= user.display_name %></td>
+        <td><%= user.email %></td>
+        <% if user.friends.include?(current_user) %>
+            <td class="negative"><i class="remove user icon"></i><%= link_to 'Remove Friend', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+      <%else%>
+            <td class="positive"><i class="add user icon"></i><%= link_to 'Add Friend', friend_requests_path(:friend_id => user), method: :post, data: {confirm: 'Are you sure you want to add this friend?'} %></td>
+      <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+  <tfoot>
+  <tr><th></th>
+    <th><%=User.count%> Total Users </th>
+    <th></th>
+    <th colspan="4"></th>
+  </tr></tfoot>
+</table>
+
+<br>
+
+
+<script>
+    $(function() {
+        $('table').tablesort()
+    });
+</script>

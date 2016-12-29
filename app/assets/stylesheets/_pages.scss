@@ -1,0 +1,121 @@
+//NAVIGATION
+
+#brand {
+    margin: 1px;
+    padding-right: 5px;
+}
+
+.ui.menu .item {
+    position: relative;
+    vertical-align: middle;
+    line-height: 1;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background: none;
+    padding: 0.92857143em 1.14285714em;
+    text-transform: none;
+    color: rgba(0, 0, 0, 0.87);
+    font-weight: normal;
+    -webkit-transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
+    transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
+}
+
+.ui.menu {
+    font-size: 1rem;
+}
+.ui.toggle.checkbox {
+//empty rule
+}
+
+html {
+    font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+    font-size: 14px !important;
+    -webkit-tap-highlight-color: transparent;
+}
+
+
+
+
+  body {
+    background-color: #FFFFFF;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    min-width: 320px;
+    background: #FFFFFF;
+    font-family: "Lato", "Helvetica Neue", Arial, Helvetica, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.4285em;
+    color: rgba(0, 0, 0, 0.87);
+    font-smoothing: antialiased;
+  }
+
+  .ui.menu .item img.logo {
+    margin-right: 1.5em;
+  }
+  .main.container {
+    margin-top: 7em;
+  }
+  .wireframe {
+    margin-top: 2em;
+  }
+  .ui.footer.segment {
+    margin: 5em 0 0;
+    padding: 5em 0;
+
+  }
+
+  .ui.input {
+    font-size: 1.2em;
+}
+
+
+//flash notice in views/layouts/app
+.ui.negative.message {
+  text-align: center;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.ui.positive.message {
+  margin-top: 30px;
+  font-size: 18px;
+}
+
+#apple_pagination {
+  text-align: center;
+  padding: 1em;
+  cursor: default;
+  letter-spacing: .05em;
+  }
+
+.center {
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
+#center {
+  justify-content: center;
+  margin: auto;
+  text-align: center;
+}
+
+#socialink {
+  padding: 5px;
+  margin: 5px;
+}
+
+.ui.menu .ui.dropdown .menu > .item {
+  min-width: 240px;
+}
+
+#disabled {
+  text-decoration: line-through;
+}

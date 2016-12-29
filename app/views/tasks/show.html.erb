@@ -1,24 +1,33 @@
-<p id="notice"><%= notice %></p>
+<br>
 
-<p>
-  <strong>Title:</strong>
-  <%= @task.title %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
+<div class="ui container">
 
-<p>
-  <strong>Priority:</strong>
-  <%= @task.priority %>
-</p>
+  <table class="ui celled table">
+  <thead>
+    <tr><th>Title:</th>
+    <th>Priority:</th>
+    <th>Description:</th>
+    <th>Created By:</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td>
+       <%= @task.title %>
+      </td>
+      <td><%= @task.priority %></td>
+      <td><%= @task.description %></td>
+      <td><%= @task.user.display_name %></td>
+    </tr>
 
-<p>
-  <strong>Due:</strong>
-  <%= @task.due %>
-</p>
+  </tbody>
+</table>
 
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+
+<br>
+<div class="ui buttons">
+<%= link_to 'Edit', edit_task_path(@task), class: 'ui secondary button' %>
+<div class="or"></div>
+<%= link_to 'All Tasks', tasks_path, class: 'ui button' %>
+</div>
+</div>

@@ -1,0 +1,52 @@
+<%= render 'shared/submenu' %>
+<div class="ui grid">
+  <div class="six wide column">
+        <div class="ui raised card">
+            <div class="image">
+                <%= image_tag @user.avatar.url(:medium) %>
+            </div>
+            <div class="content">
+                <a class="header"><%= @user.display_name.capitalize %></br></a>
+            <div class="meta">
+                <span class="date">
+                    <em>Member since:
+                        <%=@user.created_at.strftime("%B %d, %Y")%></span>
+                </em>
+            </div>
+            <div class="description">
+                <strong>Display name:</strong>
+                <%= @user.display_name %></br>
+            <strong>Email:</strong>
+              <%= @user.email %></br>
+              <strong>Time Zone:</strong>
+              <em><%= @user.time_zone %></em></div>
+        </div>
+
+        <div class="extra content">
+        <a>
+            <% if @user.tasks.count != 0 %>
+            <%= image_tag('list-4.png', size: '36x36', alt: 'tasks due') %>
+            <%else%>
+            <%= image_tag('list-3.png', size: '36x36', alt: 'tasks due') %>
+            <%end%>
+            <%=link_to ' Total Tasks Due: ', tasks_path%>
+            <%= @user.tasks.count %>
+        </a>
+        </div>
+          <div class="extra content">
+            <a>
+                  <%= image_tag('collaboration.png', size: '36x36', alt: 'friends') %>
+
+              <%=link_to ' Friends List: ', friends_path%>
+              <%= @user.friends.count %>
+            </a>
+          </div>
+        </div>
+  </div><!-- ##### END OF USER CARD ##### -->
+ <!-- ##### END OF FIRST COLUMN ##### -->
+
+<div class="eight wide column">
+  <p>second column goes here</p>
+
+</div>
+</div>

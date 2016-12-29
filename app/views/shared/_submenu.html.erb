@@ -1,0 +1,54 @@
+<div class="ui menu">
+  <a class="item">
+    <%=link_to 'User Directory', users_path, class: 'item' %>
+  </a>
+
+  <a class="item">
+    <%=link_to 'My Tasks', tasks_path, class: 'item' %>
+</a>
+
+  <div class="right menu">
+    <div class="ui blue basic floating labeled icon dropdown button">
+      <i class="user icon"></i>
+      <span class="text">Profile</span>
+      <div class="menu">
+        <div class="item">
+          <i class="user icon"></i>
+          <span class="description"></span>
+          <span class="text"><%= link_to ' View Profile ', current_user%></span>
+        </div>
+        <div class="item">
+          <i class="setting icon"></i>
+          <span class="description"></span>
+          <span class="text"><%= link_to ' Edit Profile ', edit_user_path(current_user)%></span>
+        </div>
+        <div class="divider"></div>
+        <div class="header">
+          Manage Friends
+        </div>
+        <div class="divider"></div>
+        <div class="item">
+          <i class="users icon"></i>
+          <span class="description"> <%= current_user.friends.count %></span>
+          <span class="text"><%= link_to ' Friends ', friends_path%></span>
+        </div>
+        <div class="item">
+          <i class="reply all icon"></i>
+          <span class="description"><%= current_user.friend_requests.count%></span>
+          <span class="text"><%= link_to ' Friend Requests ', friend_requests_path%></span>
+        </div>
+        <div class="item">
+          <i class="disabled comments icon"></i>
+          <span class="description" id="disabled">5 new</span>
+          <span class="text" id="disabled">Discussion</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- end of sub menu -->
+<script>
+    $('.ui.dropdown')
+        .dropdown()
+    ;
+</script>

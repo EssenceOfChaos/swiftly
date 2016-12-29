@@ -1,33 +1,81 @@
-<p id="notice"><%= notice %></p>
+<%= render 'shared/submenu' %>
 
-<h1>Tasks</h1>
+<h1 id="center">Tasks for <%=link_to current_user.display_name, current_user %> </h1>
+<br />
+<% if @task.errors.any? %>
+    <div class="ui error message" id="error_explanation">
+      <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being created:</h2>
 
-<table>
-  <thead>
+      <ul>
+        <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            </ul>
+            </div>
+        <% end %>
+<% end %>
+<div id='incomplete_tasks'>
+<table class="ui sortable celled table">
+  <thead class="full width">
     <tr>
-      <th>Title</th>
+      <th>Created by</th>
+      <th>Task</th>
       <th>Description</th>
       <th>Priority</th>
-      <th>Due</th>
-      <th colspan="3"></th>
+      <th>Created on</th>
+      <th class="sorted descending">Due by</th>
+      <th colspan="3">Actions</th>
     </tr>
   </thead>
-
   <tbody>
     <% @tasks.each do |task| %>
-      <tr>
+      <tr id='<%=task.id%>'>
+        <td><%= task.user.display_name%></td>
         <td><%= task.title %></td>
         <td><%= task.description %></td>
         <td><%= task.priority %></td>
-        <td><%= task.due %></td>
-        <td><%= link_to 'Show', task %></td>
-        <td><%= link_to 'Edit', edit_task_path(task) %></td>
-        <td><%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= task.created_at.strftime("%b %d, %Y") %></td>
+        <% if task.due_date.present? %>
+        <td><%= distance_of_time_in_words(task.due_date, Time.now) %></td>
+            <%else%>
+            <td>Not Specified</td>
+            <%end%>
+        <td class="positive"><%= link_to 'View', task %></td>
+        <td class="warning"><%= link_to 'Edit', edit_task_path(task) %></td>
+        <td class="negative"><%= link_to 'Remove', task, method: :delete, data: { confirm: 'Are you sure?' }, remote: true, id: 'delete_task' %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+</div>
+
 
 <br>
 
-<%= link_to 'New Task', new_task_path %>
+<div class='ui grid'>
+  <div class='six wide column'>
+    <!-- START MODAL -->
+    <%=link_to 'New Task', new_task_path, id: 'new_link', class: 'ui primary button', remote: true %>
+    <div class="ui small modal" id="task_modal">
+      <i class="close icon"></i>
+      <div class="header">Add Task</div>
+      <div class="content">
+       <%= render 'form' %>
+      </div>
+    </div>
+    </div>
+    <!-- END MODAL -->
+</div>
+<br />
+<div class="center" id="apple_pagination">
+  <% if @tasks.count > 5 %>
+      <%= will_paginate @collection, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+  <%else%>
+  <%="Page 1 of 1" %>
+  <%end%>
+</div>
+
+<script>
+    $(function() {
+        $('table').tablesort()
+    });
+</script>

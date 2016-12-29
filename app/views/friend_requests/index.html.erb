@@ -1,0 +1,54 @@
+<%= render 'shared/submenu' %>
+<div class="ui grid">
+  <div class="one wide column"></div>
+  <div class="six wide column">
+    <h2 align="center">Sent Requests</h2>
+        <table class="ui single line table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Sent</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @outgoing.each do |outgoing| %>
+              <tr>
+            <td><%= outgoing.friend.display_name%></td>
+            <td><%= time_ago_in_words(outgoing.created_at)%> ago </td>
+            <td><%= link_to 'Cancel', friend_request_path(outgoing), class: 'tiny ui negative basic button', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <%end%>
+          </tbody>
+        </table>
+  </div>
+  <div class="one wide column"></div>
+
+  <div class="six wide column">
+        <h2 align="center">Received Requests</h2>
+        <table class="ui single line table">
+          <thead>
+          <tr>
+            <th>Name</th>
+            <th>Received</th>
+            <th colspan="2">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+            <% @incoming.each do |incoming| %>
+              <tr>
+            <td><%= incoming.user.display_name%></td>
+            <td><%= time_ago_in_words(incoming.created_at)%> ago </td>
+            <td><%= link_to 'Accept', friend_request_path(incoming),class: 'tiny ui positive basic button', :method => :patch%></td>
+          </tr>
+          <%end%>
+          </tbody>
+        </table>
+
+
+  </div>
+
+
+
+
+</div>

@@ -1,0 +1,65 @@
+<%= form_tag friends_path, remote: true, method: :get, id: 'friend-lookup-form' do %>
+    <a class="ui item">
+      <div class="ui icon input">
+        <%= text_field_tag :search,
+
+                           params[:search],
+
+                           placeholder: 'Name or Email',
+
+                           autofocus: true,
+
+                           class: 'ui small icon input' %>
+        <%= button_tag(type: :submit, class: 'ui tiny basic primary button') do %>
+
+            <i class='fa fa-search'></i> Search friends
+
+        <% end %>
+      </div>
+    </a>
+    </div>
+    </div>
+<% end %>
+<div class="results" id='friend-lookup-results'>
+  <%= render 'shared/spinner' %>
+  <% if @users %>
+      <% if @users.size > 0 %>
+          <h3>Search Results</h3>
+
+          <table class=" ui celled table">
+            <% @users.each do |user| %>
+                <thead class="full width">
+                <tr>
+                  <th class="two wide"><strong>Name:</strong></th>
+                  <th class="three wide"><strong>Email:</strong></th>
+                  <th colspan="2"><strong>Profile:</strong></th>
+                  <th class="two wide"><strong>Add:</strong></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                  <td><%= user.display_name %></td>
+                  <td><%= user.email %></td>
+                  <td><%= link_to "View Profile", user_path(user), class: "ui basic button success" %></td>
+                  <% if current_user.not_friends_with?(user.id) %>
+                      <td><%= link_to "Add friend", add_friend_path(user: current_user, friend: user),
+
+                                      class: 'ui tiny basic success button', method: :post %></td>
+                  <% else %>
+                          <span class='label label-primary'>
+                            You are friends
+                          </span>
+                      </tr>
+                      </tbody>
+                      </table>
+                  <% end %>
+            <% end %>
+            </div>
+      <% else %>
+          <div class="ui raised segment">
+            <p> Sorry, no users matched your search </p>
+          </div>
+      <% end %>
+  <% end %>
+  <div id="friend-lookup-errors"></div>
+  <br />

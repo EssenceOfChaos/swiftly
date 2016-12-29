@@ -1,0 +1,51 @@
+<%= render 'shared/submenu' %>
+
+<div class='twelve wide column' id='friend-lookup-results'>
+
+  <table class="ui celled table">
+    <thead class="full width">
+    <tr>
+      <th colspan="5" class="page-header">
+        <h2 align='center'>My Friends</h2>
+      </th>
+    </tr>
+    <tr align='center'>
+      <th class="two wide">Friend</th>
+      <th class="two wide">Email</th>
+      <th class="three wide">Friends since</th>
+      <th colspan="2">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+      <%@friends.each do |friend| %>
+          <tr>
+            <td><%= friend.display_name%></td>
+            <td><%= friend.email %></td>
+            <td><%= friend.created_at.strftime("%b %d, %Y")%></td>
+            <td>
+              <%= link_to "View Profile", user_path(friend), class: "ui basic positive button" %></td>
+            <td> <%= link_to 'Remove Friend',
+
+                             friend_path(friend),
+
+                             :method => :delete,
+
+                             :data => { :confirm => 'Are you sure?' },
+
+                             :class => 'ui basic negative button' %>
+            </td>
+          </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+<div id="friend-lookup-errors"></div>
+<br>
+<div class="center" id="apple_pagination">
+  <% if @friends.count > 5 %>
+      <%= will_paginate @collection, renderer: WillPaginateSemanticUi::ActionView::Renderer %>
+  <%else%>
+      <%="Page 1 of 1" %>
+  <%end%>
+</div>
+    <br>

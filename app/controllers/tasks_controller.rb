@@ -1,12 +1,18 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-
+  # FIXME ajax should be working with create and destroy actions
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @user = current_user
+    @tasks = @user.tasks.all.order(:priority).paginate(:page => params[:page], :per_page => 5)
+    @task = Task.new
+
   end
 
+  def listuser
+    @tasks = Task.where(:user_id => current_user).order(:priority)
+  end
   # GET /tasks/1
   # GET /tasks/1.json
   def show
@@ -25,14 +31,16 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
     @task = Task.new(task_params)
-
+    @task.user = current_user
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to tasks_path, notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
+        format.js
       else
         format.html { render :new }
         format.json { render json: @task.errors, status: :unprocessable_entity }
+        format.js
       end
     end
   end
@@ -58,6 +66,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 
@@ -69,6 +78,6 @@ class TasksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
-      params.require(:task).permit(:title, :description, :priority, :due)
+      params.require(:task).permit(:title, :description, :priority, :user_id, :due_date)
     end
 end

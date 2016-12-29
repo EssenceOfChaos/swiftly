@@ -1,37 +1,43 @@
-<%= form_for(task) do |f| %>
-  <% if task.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(task.errors.count, "error") %> prohibited this task from being saved:</h2>
+<%= form_for @task, remote: true, class: 'ui form' do |t| %>
+       <div class="two fields">
+        <div class="required field">
+         <strong> <%= t.label :title %>:</strong>
+          <%=t.text_field :title %>
+        </div><br />
 
-      <ul>
-      <% task.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <div class="field">
+           <strong><%= t.label :priority %>:</strong>
+            <em style="color:red;">Highest</em> <%=t.range_field :priority, in: 1..10 %> <em style="color:green;">Lowest</em>
+          </div><br />
+       </div>
+          <div class="field">
+            <strong><%= t.label :due_date %>:</strong>
+            <%=t.datetime_field :due_date %>
+       </div><br />
 
-  <div class="field">
-    <%= f.label :title %>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %>
-    <%= f.text_area :description %>
-  </div>
-
-  <div class="field">
-    <%= f.label :priority %>
-    <%= f.number_field :priority %>
-  </div>
-
-  <div class="field">
-    <%= f.label :due %>
-    <%= f.datetime_select :due %>
-  </div>
-
+          <div class="field">
+           <strong> <%= t.label :description %>:</strong>
+            <%=t.text_area :description%>
+          </div><br />
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to 'Cancel', tasks_path, class: 'ui basic negative button' %>
+    <%= t.submit class: 'ui basic positive button', remote: true %>
   </div>
-<% end %>
+<%end%>
+
+<script>
+    $('.ui.form')
+        .form({
+            fields: {
+                title: {
+                    identifier: 'title',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Please enter a task title'
+                        }
+                    ]
+                }
+            }})
+    ;
+</script>

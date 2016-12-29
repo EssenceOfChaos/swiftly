@@ -1,0 +1,81 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="//cdn.muicss.com/mui-0.9.6/css/mui.css" />
+    <script src="//cdn.muicss.com/mui-0.9.6/js/mui.js"></script>
+    <style>
+      /* Add font-smoothing */
+      html,
+      body,
+      input,
+      textarea,
+      buttons {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
+      }
+    </style>
+  </head>
+
+<div class="mui-container-fluid">
+  <div class="mui-row">
+   <div class="mui-col-md-6">
+   <%= form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <div class="ui error message" id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+      <% user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <legend>User Info</legend>
+  <div class="mui-textfield mui-textfield--float-label">
+    <%= f.text_field :display_name %>
+    <label>Display name:</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <%= f.email_field :email %>
+    <label>Email:</label>
+  </div>
+         <div class="mui-textfield">
+           <%= f.time_zone_select :time_zone, nil, include_blank: true %>
+           <label>Time Zone:</label>
+         </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <%= f.password_field :password %>
+    <label>Password:</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <%= f.password_field :password_confirmation %>
+    <label>Password confirmation:</label>
+  </div>
+  <div class="mui-textfield mui-textfield--float-label">
+    <%= f.file_field :avatar %>
+    <div class= "ui pointing label">Profile picture</div>
+  </div>
+  <button type="submit" value="Create User" class="mui-btn mui-btn--raised">Submit</button>
+<% end %>
+<br>
+
+
+
+   </div>
+    <div class="mui-col-md-6"></div>
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
